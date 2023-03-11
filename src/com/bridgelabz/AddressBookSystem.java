@@ -1,18 +1,21 @@
 package com.bridgelabz;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class AddressBookSystem {
 
     static class Contact {
-        private String firstName;
-        private String lastName;
-        private String address;
-        private String city;
-        private String state;
-        private String zip;
-        private String phoneNumber;
-        private String email;
+        String firstName;
+        String lastName;
+        String address;
+        String city;
+        String state;
+        String zip;
+        String phoneNumber;
+        String email;
 
-        public Contact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
+        Contact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.address = address;
@@ -23,53 +26,71 @@ public class AddressBookSystem {
             this.email = email;
         }
 
-        // Getter methods for the Contact fields
-        public String getFirstName() {
-            return firstName;
+        public String toString() {
+            return "Name: " + firstName + " " + lastName + "\n" +
+                    "Address: " + address + "\n" +
+                    "City: " + city + "\n" +
+                    "State: " + state + "\n" +
+                    "Zip: " + zip + "\n" +
+                    "Phone Number: " + phoneNumber + "\n" +
+                    "Email: " + email;
+        }
+    }
+
+    static class AddressBook {
+        String name;
+        List<Contact> contacts;
+
+        AddressBook(String name) {
+            this.name = name;
+            contacts = new ArrayList<>();
         }
 
-        public String getLastName() {
-            return lastName;
+        void addContact(Contact contact) {
+            contacts.add(contact);
         }
 
-        public String getAddress() {
-            return address;
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public String getState() {
-            return state;
-        }
-
-        public String getZip() {
-            return zip;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public String getEmail() {
-            return email;
+        void displayContacts() {
+            for (Contact contact : contacts) {
+                System.out.println(contact);
+                System.out.println();
+            }
         }
     }
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Welcome to Address Book Program in AddressBook");
-        Contact contact1 = new Contact("Prasanjya", "Sen", "123 Main Street", "Pune", "Maharashtra", "12345", "555-555-1234", "abxd@gmail.com");
 
-        // Display the contact details
-        System.out.println("Contact Details:");
-        System.out.println("Name: " + contact1.getFirstName() + " " + contact1.getLastName());
-        System.out.println("Address: " + contact1.getAddress());
-        System.out.println("City: " + contact1.getCity());
-        System.out.println("State: " + contact1.getState());
-        System.out.println("Zip: " + contact1.getZip());
-        System.out.println("Phone Number: " + contact1.getPhoneNumber());
-        System.out.println("Email: " + contact1.getEmail());
+        // Create a new address book
+        AddressBook addressBook = new AddressBook("My Address Book");
 
+        // Add a new contact
+        System.out.println("Add a new contact:");
+        System.out.print("First name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Last name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Address: ");
+        String address = scanner.nextLine();
+        System.out.print("City: ");
+        String city = scanner.nextLine();
+        System.out.print("State: ");
+        String state = scanner.nextLine();
+        System.out.print("Zip: ");
+        String zip = scanner.nextLine();
+        System.out.print("Phone number: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+
+        Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        addressBook.addContact(newContact);
+        System.out.println("Contact added successfully!");
+
+        // Display all contacts in the address book
+        System.out.println("All Contacts:");
+        addressBook.displayContacts();
     }
 
 }
