@@ -1,5 +1,6 @@
 package com.bridgelabz;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -83,7 +84,11 @@ public class AddressBookSystem {
         public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
 
+            List<Contact> contacts = new ArrayList<>();
+
+
             Contact contact = new Contact();
+
 
             System.out.println("Enter First Name:");
             String firstName = scanner.nextLine();
@@ -129,6 +134,8 @@ public class AddressBookSystem {
             System.out.println("Phone Number: " + contact.getPhoneNumber());
             System.out.println("Email: " + contact.getEmail());
 
+            contacts.add(contact);
+
             System.out.println("\nEnter First Name to edit:");
             String editFirstName = scanner.nextLine();
 
@@ -173,6 +180,23 @@ public class AddressBookSystem {
                 System.out.println("Email: " + contact.getEmail());
             } else {
                 System.out.println("Contact not found");
+            }
+
+            // code for deleting a contact
+            System.out.println("\nEnter First Name to delete:");
+            String deleteFirstName = scanner.nextLine();
+
+            System.out.println("Enter Last Name to delete:");
+            String deleteLastName = scanner.nextLine();
+
+            Iterator<Contact> iterator = contacts.iterator();
+            while (iterator.hasNext()) {
+                Contact c = iterator.next();
+                if (c.getFirstName().equals(deleteFirstName) && c.getLastName().equals(deleteLastName)) {
+                    iterator.remove();
+                    System.out.println("Contact deleted successfully");
+                    break;
+                }
             }
         }
 
